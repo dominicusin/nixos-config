@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./base.nix
     ];
 
   # Use the GRUB 2 boot loader.
@@ -35,10 +36,6 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
-    git
-    termite
-    vim
-    wget
   ];
 
   # List services that you want to enable:
