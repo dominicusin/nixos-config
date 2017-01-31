@@ -49,7 +49,9 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
+    (hunspellWithDicts (with hunspellDicts; [en-us]))
     anki
+    awscli
     borgbackup
     chromium
     dejavu_fonts
@@ -62,7 +64,6 @@
     gnupg
     greybird # GTK theme
     htop
-    (hunspellWithDicts (with hunspellDicts; [en-us]))
     i3status
     keychain
     liberation_ttf
@@ -80,6 +81,7 @@
     redshift
     ruby
     silver-searcher
+    source-code-pro
     termite
     texlive.combined.scheme-full
     tmux
@@ -88,6 +90,7 @@
     wget
     x11_ssh_askpass
     xorg.xbacklight
+    zerotierone
     zsh
   ];
 
