@@ -28,11 +28,11 @@
   networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Select internationalisation properties. 
-  # i18n = {
-  #   consoleFont = "Lat2-Terminus16";
-  #   consoleKeyMap = "us";
-  #   defaultLocale = "en_US.UTF-8";
-  # };
+  i18n = {
+    consoleFont = "Lat2-Terminus16";
+    consoleKeyMap = "us";
+    defaultLocale = "en_US.UTF-8";
+  };
 
   # Set your time zone.
   time.timeZone = "US/Central";
@@ -50,8 +50,6 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     anki
-    aspell
-    aspellDicts.en
     borgbackup
     chromium
     dejavu_fonts
@@ -64,10 +62,12 @@
     gnupg
     greybird # GTK theme
     htop
+    (hunspellWithDicts (with hunspellDicts; [en-us]))
     i3status
     keychain
     liberation_ttf
     libnotify
+    libreoffice
     lsof
     moreutils
     mr
