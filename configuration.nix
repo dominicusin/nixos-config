@@ -54,7 +54,6 @@
     awscli
     borgbackup
     chromium
-    dejavu_fonts
     dmenu
     dunst
     emacs25
@@ -63,10 +62,10 @@
     gitAndTools.git-annex
     gnupg
     greybird # GTK theme
+    hexchat
     htop
     i3status
     keychain
-    liberation_ttf
     libnotify
     libreoffice
     lsof
@@ -75,13 +74,12 @@
     nmap
     nodejs
     openjdk
-    powerline-fonts
+    psmisc
     pwgen
     rcm
     redshift
     ruby
     silver-searcher
-    source-code-pro
     termite
     texlive.combined.scheme-full
     tmux
@@ -128,6 +126,16 @@
     longitude = "-89.4012";
     temperature.day = 6200;
     temperature.night = 3700;
+  };
+
+  fonts = {
+    fonts = with pkgs; [
+      dejavu_fonts
+      liberation_ttf
+      powerline-fonts
+      source-code-pro
+      ttf_bitstream_vera
+    ];
   };
   
   users.extraUsers.djwhitt = {
