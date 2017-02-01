@@ -60,6 +60,8 @@
     evince
     git
     gitAndTools.git-annex
+    gnome3.adwaita-icon-theme
+    gnome3.gnome_themes_standard
     gnupg
     greybird # GTK theme
     hexchat
@@ -130,6 +132,7 @@
 
   fonts = {
     fonts = with pkgs; [
+      cantarell_fonts
       dejavu_fonts
       liberation_ttf
       powerline-fonts
