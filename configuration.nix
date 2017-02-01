@@ -140,6 +140,19 @@
 
   security.sudo.wheelNeedsPassword = false;
 
+  systemd.services.zerotier-one = {
+    enable = true;
+    description = "ZeroTier One";
+    after = [ "network.target" ];
+    wants = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.zerotierone}/bin/zerotier-one";
+      Restart = "always";
+      KillMode = "process";
+    };
+  };
+
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "16.09";
 }
