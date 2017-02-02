@@ -63,7 +63,6 @@
     gnome3.adwaita-icon-theme
     gnome3.gnome_themes_standard
     gnupg
-    greybird # GTK theme
     hexchat
     htop
     i3status
@@ -76,16 +75,19 @@
     nmap
     nodejs
     openjdk
+    pciutils
     psmisc
     pwgen
     rcm
     redshift
     ruby
     silver-searcher
+    sylpheed
     termite
     texlive.combined.scheme-full
     tmux
     universal-ctags
+    usbutils
     vim
     wget
     x11_ssh_askpass
@@ -128,6 +130,10 @@
     longitude = "-89.4012";
     temperature.day = 6200;
     temperature.night = 3700;
+  };
+
+  systemd.user.services.redshift = {
+    conflicts = [ "exit.target" ];
   };
 
   fonts = {
