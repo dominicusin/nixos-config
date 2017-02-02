@@ -24,9 +24,6 @@
     }
   ];
 
-  networking.hostName = "djwhitt-laptop"; # Define your hostname.
-  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
   # Select internationalisation properties. 
   i18n = {
     consoleFont = "Lat2-Terminus16";
@@ -36,6 +33,28 @@
 
   # Set your time zone.
   time.timeZone = "US/Central";
+
+  #############################################################################
+  ### Networking
+
+  networking.hostName = "djwhitt-laptop"; # Define your hostname.
+  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  systemd.services.zerotier-one = {
+    enable = true;
+    description = "ZeroTier One";
+    after = [ "network.target" ];
+    wants = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.zerotierone}/bin/zerotier-one";
+      Restart = "always";
+      KillMode = "process";
+    };
+  };
+
+  #############################################################################
+  ### Packages
 
   nixpkgs.config = {
     allowUnfree = true;
@@ -67,6 +86,7 @@
     htop
     i3status
     keychain
+    leafpad
     libnotify
     libreoffice
     lsof
@@ -156,19 +176,6 @@
   };
 
   security.sudo.wheelNeedsPassword = false;
-
-  systemd.services.zerotier-one = {
-    enable = true;
-    description = "ZeroTier One";
-    after = [ "network.target" ];
-    wants = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.zerotierone}/bin/zerotier-one";
-      Restart = "always";
-      KillMode = "process";
-    };
-  };
 
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "16.09";
