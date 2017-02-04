@@ -123,13 +123,14 @@
   programs.zsh.enable = true;
   programs.ssh.startAgent = true;
 
-  # List services that you want to enable:
+  #############################################################################
+  ### Services
 
-  # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-
-  # Enable CUPS to print documents.
   services.printing.enable = true;
+
+  #############################################################################
+  ### Xserver
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -141,6 +142,13 @@
     enable = true;
     sendEventsMode = "disabled-on-external-mouse";
   };
+
+  services.xserver.serverFlagsSection = ''
+    Option "BlankTime" "0"
+    Option "StandbyTime" "0"
+    Option "SuspendTime" "0"
+    Option "OffTime" "5"
+  '';
 
   services.xserver.windowManager.i3.enable = true; 
 
