@@ -24,6 +24,8 @@
     }
   ];
 
+  hardware.enableAllFirmware = true;
+
   # Select internationalisation properties. 
   i18n = {
     consoleFont = "Lat2-Terminus16";
@@ -116,6 +118,8 @@
     zsh
   ];
 
+  environment.pathsToLink = [ "/include" ];
+
   programs.zsh.enable = true;
   programs.ssh.startAgent = true;
 
@@ -133,13 +137,9 @@
   services.xserver.layout = "us";
   services.xserver.xkbOptions = "ctrl:nocaps";
 
-  services.xserver.synaptics = {
+  services.xserver.libinput = {
     enable = true;
-    horizEdgeScroll = false;
-    horizTwoFingerScroll = true;
-    palmDetect = true;
-    palmMinWidth = 8;
-    palmMinZ = 8;
+    sendEventsMode = "disabled-on-external-mouse";
   };
 
   services.xserver.windowManager.i3.enable = true; 
