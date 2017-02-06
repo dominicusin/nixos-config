@@ -26,7 +26,7 @@
 
   hardware.enableAllFirmware = true;
 
-  # Select internationalisation properties. 
+  # Select internationalisation properties.
   i18n = {
     consoleFont = "Lat2-Terminus16";
     consoleKeyMap = "us";
@@ -153,7 +153,7 @@
     Option "OffTime" "5"
   '';
 
-  services.xserver.windowManager.i3.enable = true; 
+  services.xserver.windowManager.i3.enable = true;
 
   services.redshift = {
     enable = true;
@@ -177,7 +177,7 @@
       ttf_bitstream_vera
     ];
   };
-  
+
   users.extraUsers.djwhitt = {
     isNormalUser = true;
     uid = 1000;
