@@ -96,6 +96,7 @@
     lsof
     moreutils
     mr
+    nixops
     nmap
     nodejs
     openjdk
