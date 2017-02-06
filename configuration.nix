@@ -83,6 +83,7 @@
     gitAndTools.git-annex
     gnome3.adwaita-icon-theme
     gnome3.gnome_themes_standard
+    gnumake
     gnupg
     hexchat
     htop
@@ -93,7 +94,6 @@
     libnotify
     libreoffice
     lsof
-    make
     moreutils
     mr
     nmap
