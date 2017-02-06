@@ -86,12 +86,14 @@
     gnupg
     hexchat
     htop
+    i3lock
     i3status
     keychain
     leafpad
     libnotify
     libreoffice
     lsof
+    make
     moreutils
     mr
     nmap
@@ -113,6 +115,7 @@
     vim
     wget
     x11_ssh_askpass
+    xautolock
     xorg.xbacklight
     zerotierone
     zsh
@@ -141,7 +144,6 @@
 
   services.xserver.libinput = {
     enable = true;
-    sendEventsMode = "disabled-on-external-mouse";
   };
 
   services.xserver.serverFlagsSection = ''
