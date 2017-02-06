@@ -5,4 +5,3 @@ switch: sync
 
 sync:
 	sudo rsync -r ./ /etc/nixos/
-	sudo chmod -R 600 /etc/nixos
