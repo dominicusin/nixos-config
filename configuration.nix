@@ -131,13 +131,13 @@
   ### Services
 
   services.avahi.enable = true;
+  services.bitlbee.enable = true;
   services.openssh.enable = true;
   services.printing.enable = true;
 
   #############################################################################
-  ### Xserver
+  ### X
 
-  # Enable the X11 windowing system.
   services.xserver.enable = true;
 
   services.xserver.layout = "us";
