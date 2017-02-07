@@ -112,6 +112,7 @@
     texlive.combined.scheme-full
     tmux
     universal-ctags
+    unzip
     usbutils
     vim
     wget
