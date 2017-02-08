@@ -7,8 +7,8 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./private/wifi.nix
+      ../hardware-configuration.nix
+      ../private/wifi.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
