@@ -107,7 +107,7 @@
     redshift
     ruby
     silver-searcher
-    sqlite
+    sqlite-interactive
     sylpheed
     termite
     texlive.combined.scheme-full
