@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ../hardware-configuration.nix
+      ../config/base.nix
       ../private/wifi.nix
     ];
 
@@ -73,55 +74,38 @@
     (hunspellWithDicts (with hunspellDicts; [en-us]))
     anki
     awscli
-    borgbackup
     chromium
     dmenu
     dunst
     emacs25
     evince
-    git
     gitAndTools.git-annex
     gnome3.adwaita-icon-theme
     gnome3.gnome_themes_standard
-    gnumake
-    gnupg
     hexchat
-    htop
     i3lock
     i3status
     keychain
     leafpad
     libnotify
     libreoffice
-    lsof
-    moreutils
-    mr
     nixops
-    nmap
     nodejs
     openjdk
     pciutils
     psmisc
     pwgen
-    rcm
     redshift
     ruby
-    silver-searcher
     sqlite-interactive
     sylpheed
-    termite
     texlive.combined.scheme-full
-    tmux
     universal-ctags
     unzip
     usbutils
-    vim
-    wget
     x11_ssh_askpass
     xautolock
     xorg.xbacklight
-    zerotierone
-    zsh
   ];
 
   environment.pathsToLink = [ "/include" ];
