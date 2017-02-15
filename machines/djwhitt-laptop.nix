@@ -43,19 +43,6 @@
   networking.hostName = "djwhitt-laptop"; # Define your hostname.
   networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  systemd.services.zerotier-one = {
-    enable = true;
-    description = "ZeroTier One";
-    after = [ "network.target" ];
-    wants = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.zerotierone}/bin/zerotier-one";
-      Restart = "always";
-      KillMode = "process";
-    };
-  };
-
   #############################################################################
   ### Packages
 

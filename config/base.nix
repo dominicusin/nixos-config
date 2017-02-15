@@ -1,6 +1,25 @@
 { config, pkgs, ... }:
 
 {
+  #############################################################################
+  ### Networking
+
+  systemd.services.zerotier-one = {
+    enable = true;
+    description = "ZeroTier One";
+    after = [ "network.target" ];
+    wants = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.zerotierone}/bin/zerotier-one";
+      Restart = "always";
+      KillMode = "process";
+    };
+  };
+
+  #############################################################################
+  ### Packages
+
   environment.systemPackages = with pkgs; [
     (hunspellWithDicts (with hunspellDicts; [en-us]))
     borgbackup
