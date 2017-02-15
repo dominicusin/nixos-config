@@ -10,6 +10,7 @@
       ../hardware-configuration.nix
       ../config/base.nix
       ../private/wifi.nix
+      ../private/hosts.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
