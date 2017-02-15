@@ -80,7 +80,6 @@
     nodejs
     openjdk
     pciutils
-    psmisc
     pwgen
     redshift
     ruby
@@ -88,7 +87,6 @@
     sylpheed
     texlive.combined.scheme-full
     universal-ctags
-    unzip
     usbutils
     x11_ssh_askpass
     xautolock
