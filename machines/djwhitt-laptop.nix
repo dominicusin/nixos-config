@@ -79,6 +79,7 @@
     libreoffice
     nixops
     nodejs
+    obnam
     openjdk
     pciutils
     pwgen
