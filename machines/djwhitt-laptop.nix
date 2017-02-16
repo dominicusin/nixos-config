@@ -109,6 +109,11 @@
   services.printing.enable = true;
 
   #############################################################################
+  ### Laptop
+
+  services.logind.extraConfig = "HandleLidSwitch=ignore";
+
+  #############################################################################
   ### X
 
   services.xserver.enable = true;
