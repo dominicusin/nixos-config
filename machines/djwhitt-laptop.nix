@@ -77,6 +77,7 @@
     leafpad
     libnotify
     libreoffice
+    mplayer
     nixops
     nodejs
     obnam
@@ -90,6 +91,7 @@
     texlive.combined.scheme-full
     universal-ctags
     usbutils
+    virtualbox
     x11_ssh_askpass
     xautolock
     xorg.xbacklight
