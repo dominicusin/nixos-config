@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
       ../hardware-configuration.nix
       ../config/base.nix
+      ../private/mail.nix
       ../private/wifi.nix
       ../private/hosts.nix
     ];
@@ -83,6 +84,7 @@
     obnam
     openjdk
     pciutils
+    phantomjs2
     pwgen
     redshift
     ruby
@@ -95,6 +97,7 @@
     x11_ssh_askpass
     xautolock
     xorg.xbacklight
+    zip
   ];
 
   environment.pathsToLink = [ "/include" ];
