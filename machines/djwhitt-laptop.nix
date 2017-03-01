@@ -55,6 +55,11 @@
       enablePepperFlash = true;
       enablePepperPDF = true;
     };
+
+    # Remove once fixed package is available
+    packageOverrides = pkgs : {
+      heroku = pkgs.callPackage ../pkgs/heroku/default.nix { };
+    };
   };
 
   # List packages installed in system profile. To search by name, run:
@@ -63,6 +68,7 @@
     (hunspellWithDicts (with hunspellDicts; [en-us]))
     anki
     awscli
+    bundler
     chromium
     dmenu
     dunst
@@ -71,6 +77,7 @@
     gitAndTools.git-annex
     gnome3.adwaita-icon-theme
     gnome3.gnome_themes_standard
+    heroku
     hexchat
     i3lock
     i3status
@@ -79,13 +86,14 @@
     libnotify
     libreoffice
     mplayer
-    nixops
+    nix-repl
     nodejs
     obnam
     openjdk
     pciutils
     phantomjs2
     pwgen
+    rake
     redshift
     ruby
     sqlite-interactive
