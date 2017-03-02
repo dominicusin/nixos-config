@@ -81,6 +81,7 @@
     hexchat
     i3lock
     i3status
+    jq
     keychain
     leafpad
     libnotify
