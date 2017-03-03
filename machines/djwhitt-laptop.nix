@@ -5,6 +5,9 @@
 { config, pkgs, ... }:
 
 {
+  #############################################################################
+  ### Imports
+
   imports =
     [ # Include the results of the hardware scan.
       ../hardware-configuration.nix
@@ -13,6 +16,9 @@
       ../private/wifi.nix
       ../private/hosts.nix
     ];
+
+  #############################################################################
+  ### Boot
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -28,6 +34,9 @@
   ];
 
   hardware.enableAllFirmware = true;
+
+  #############################################################################
+  ### Localization
 
   # Select internationalisation properties.
   i18n = {
@@ -46,7 +55,91 @@
   networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   #############################################################################
+  ### Power Management
+
+  services.logind.extraConfig = "HandleLidSwitch=ignore";
+
+  #############################################################################
+  ### Services
+
+  services.avahi.enable = true;
+  services.bitlbee.enable = true;
+  services.openssh.enable = true;
+  services.printing.enable = true;
+
+  #############################################################################
+  ### Users
+
+  security.sudo.wheelNeedsPassword = false;
+
+  users.extraUsers.djwhitt = {
+    isNormalUser = true;
+    uid = 1000;
+    home = "/home/djwhitt";
+    shell = "/run/current-system/sw/bin/zsh";
+    extraGroups = [ "wheel" ];
+  };
+
+  #############################################################################
+  ### X
+
+  services.xserver.enable = true;
+
+  services.xserver.exportConfiguration = true;
+
+  # Keyboard
+  services.xserver.layout = "us";
+  services.xserver.xkbOptions = "ctrl:nocaps";
+
+  # Touchpad/mouse
+  services.xserver.synaptics = {
+    enable = true;
+    accelFactor = "0.002";
+    twoFingerScroll = true;
+    horizTwoFingerScroll = false;
+    horizEdgeScroll = false;
+    palmDetect = true;
+  };
+
+  # Blank screen after 10 minutes
+  services.xserver.serverFlagsSection = ''
+    Option "BlankTime" "0"
+    Option "StandbyTime" "0"
+    Option "SuspendTime" "0"
+    Option "OffTime" "10"
+  '';
+
+  services.xserver.windowManager.i3.enable = true;
+
+  services.redshift = {
+    enable = true;
+    latitude = "43.0731";
+    longitude = "-89.4012";
+    temperature.day = 6200;
+    temperature.night = 3700;
+  };
+
+  # Restart Redshift when X restarts
+  systemd.user.services.redshift = {
+    conflicts = [ "exit.target" ];
+  };
+
+  fonts = {
+    fonts = with pkgs; [
+      cantarell_fonts
+      dejavu_fonts
+      liberation_ttf
+      powerline-fonts
+      source-code-pro
+      ttf_bitstream_vera
+    ];
+  };
+
+  #############################################################################
   ### Packages
+
+  programs.zsh.enable = true;
+  programs.ssh.startAgent = true;
 
   nixpkgs.config = {
     allowUnfree = true;
@@ -100,6 +193,7 @@
     sqlite-interactive
     sylpheed
     texlive.combined.scheme-full
+    tig
     universal-ctags
     usbutils
     virtualbox
@@ -110,76 +204,6 @@
   ];
 
   environment.pathsToLink = [ "/include" ];
-
-  programs.zsh.enable = true;
-  programs.ssh.startAgent = true;
-
-  #############################################################################
-  ### Services
-
-  services.avahi.enable = true;
-  services.bitlbee.enable = true;
-  services.openssh.enable = true;
-  services.printing.enable = true;
-
-  #############################################################################
-  ### Laptop
-
-  services.logind.extraConfig = "HandleLidSwitch=ignore";
-
-  #############################################################################
-  ### X
-
-  services.xserver.enable = true;
-
-  services.xserver.layout = "us";
-  services.xserver.xkbOptions = "ctrl:nocaps";
-
-  services.xserver.libinput = {
-    enable = true;
-  };
-
-  services.xserver.serverFlagsSection = ''
-    Option "BlankTime" "0"
-    Option "StandbyTime" "0"
-    Option "SuspendTime" "0"
-    Option "OffTime" "5"
-  '';
-
-  services.xserver.windowManager.i3.enable = true;
-
-  services.redshift = {
-    enable = true;
-    latitude = "43.0731";
-    longitude = "-89.4012";
-    temperature.day = 6200;
-    temperature.night = 3700;
-  };
-
-  systemd.user.services.redshift = {
-    conflicts = [ "exit.target" ];
-  };
-
-  fonts = {
-    fonts = with pkgs; [
-      cantarell_fonts
-      dejavu_fonts
-      liberation_ttf
-      powerline-fonts
-      source-code-pro
-      ttf_bitstream_vera
-    ];
-  };
-
-  users.extraUsers.djwhitt = {
-    isNormalUser = true;
-    uid = 1000;
-    home = "/home/djwhitt";
-    shell = "/run/current-system/sw/bin/zsh";
-    extraGroups = [ "wheel" ];
-  };
-
-  security.sudo.wheelNeedsPassword = false;
 
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "16.09";
