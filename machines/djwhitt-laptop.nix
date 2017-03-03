@@ -172,7 +172,7 @@
     gnome3.gnome_themes_standard
     heroku
     hexchat
-    i3lock
+    i3lock-fancy
     i3status
     jq
     keychain
@@ -199,6 +199,7 @@
     virtualbox
     x11_ssh_askpass
     xautolock
+    xfontsel
     xorg.xbacklight
     zip
   ];
