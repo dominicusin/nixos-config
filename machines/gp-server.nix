@@ -8,17 +8,44 @@
       ../private/hosts.nix
     ];
 
+  #############################################################################
+  ### EC2
+
   ec2.hvm = true;
 
+  #############################################################################
+  ### Nix
+
   system.autoUpgrade.enable = true;
+
+  #############################################################################
+  ### Networking
 
   networking.hostName = "gp-server";
   networking.firewall.allowedTCPPorts = [ 80 443 ];
 
+  #############################################################################
+  ### Services
+
   services.jenkins.enable = true;
 
-  security.acme.certs."jenkins.spcom.org" = {
-    email = "jenkins@spcom.org";
+  #############################################################################
+  ### Users
+
+  #users.extraUsers.djwhitt = {
+  #  home = "/srv/fedwiki";
+  #};
+
+  #############################################################################
+  ### Sites
+
+  security.acme.certs = {
+    "jenkins.spcom.org" = {
+      email = "jenkins@spcom.org";
+    };
+    # "wiki.djwhitt.com" = {
+    #   email = "admin@djwhitt.com";
+    # };
   };
 
   services.nginx = {
