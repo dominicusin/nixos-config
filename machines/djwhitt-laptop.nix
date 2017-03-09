@@ -77,7 +77,7 @@
     uid = 1000;
     home = "/home/djwhitt";
     shell = "/run/current-system/sw/bin/zsh";
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "vboxusers" "wheel" ];
   };
 
   #############################################################################
@@ -141,12 +141,18 @@
   programs.zsh.enable = true;
   programs.ssh.startAgent = true;
 
+  virtualisation.virtualbox.host.enable = true;
+
   nixpkgs.config = {
     allowUnfree = true;
 
     chromium = {
       enablePepperFlash = true;
       enablePepperPDF = true;
+    };
+
+    virtualbox = {
+      enableExtensionPack = true;
     };
 
     # Remove once fixed package is available
@@ -196,7 +202,6 @@
     tig
     universal-ctags
     usbutils
-    virtualbox
     x11_ssh_askpass
     xautolock
     xfontsel
