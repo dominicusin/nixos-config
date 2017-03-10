@@ -62,7 +62,10 @@
   #############################################################################
   ### Services
 
-  services.avahi.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+  };
   services.bitlbee.enable = true;
   services.openssh.enable = true;
   services.printing.enable = true;
