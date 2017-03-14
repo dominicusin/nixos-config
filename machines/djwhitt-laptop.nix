@@ -87,8 +87,10 @@
   ### X
 
   services.xserver.enable = true;
-
   services.xserver.exportConfiguration = true;
+
+  # Video
+  services.xserver.videoDrivers = [ "modesettings" ];
 
   # Keyboard
   services.xserver.layout = "us";
@@ -177,6 +179,7 @@
     emacs25
     evince
     gitAndTools.git-annex
+    glxinfo
     gnome3.adwaita-icon-theme
     gnome3.gnome_themes_standard
     heroku
