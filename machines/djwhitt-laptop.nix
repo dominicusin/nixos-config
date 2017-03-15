@@ -18,7 +18,7 @@
     ];
 
   #############################################################################
-  ### Boot
+  ### Boot and Hardware
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -34,6 +34,11 @@
   ];
 
   hardware.enableAllFirmware = true;
+
+  hardware.pulseaudio = {
+    enable = true;
+    support32Bit = true;
+  };
 
   #############################################################################
   ### Localization
@@ -80,7 +85,7 @@
     uid = 1000;
     home = "/home/djwhitt";
     shell = "/run/current-system/sw/bin/zsh";
-    extraGroups = [ "vboxusers" "wheel" ];
+    extraGroups = [ "libvirtd" "wheel" ];
   };
 
   #############################################################################
@@ -146,7 +151,10 @@
   programs.zsh.enable = true;
   programs.ssh.startAgent = true;
 
-  virtualisation.virtualbox.host.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    enableKVM = true;
+  };
 
   nixpkgs.config = {
     allowUnfree = true;
@@ -154,10 +162,6 @@
     chromium = {
       enablePepperFlash = true;
       enablePepperPDF = true;
-    };
-
-    virtualbox = {
-      enableExtensionPack = true;
     };
 
     # Remove once fixed package is available
@@ -208,6 +212,7 @@
     tig
     universal-ctags
     usbutils
+    virtmanager
     x11_ssh_askpass
     xautolock
     xfontsel
