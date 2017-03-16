@@ -24,6 +24,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.kernelModules = [ "virtio" ];
+
   boot.initrd.luks.devices = [
     {
       name = "root";
