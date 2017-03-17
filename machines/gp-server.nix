@@ -49,20 +49,42 @@
   services.jenkins.enable = true;
 
   # Huginn
-  systemd.services.huginn = {
+  systemd.services.huginn-web = {
     enable = true;
-    description = "Huginn Server";
+    description = "Huginn Web Server";
     path = [ pkgs.bash ];
     after = [ "network.target" ];
     wants = [ "network.target" ];
     environment = {
       HOME = "/srv/huginn";
       NIX_PATH = "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos/nixpkgs:nixos-config=/etc/nixos/configuration.nix:/nix/var/nix/profiles/per-user/root/channels";
-      TEMPDIR = "/srv/huginn/tmp";
+      TEMPDIR = "/srv/huginn/huginn/tmp";
     };
     serviceConfig = {
-      WorkingDirectory = "/srv/huginn";
-      ExecStart = "/run/current-system/sw/bin/nix-shell . --run 'bundle exec foreman start'";
+      WorkingDirectory = "/srv/huginn/huginn";
+      ExecStart = "/run/current-system/sw/bin/nix-shell . --run 'bundle exec dotenv unicorn -c config/unicorn.rb'";
+      ExecReload = "/run/current-system/sw/bin/kill -s USR2 $MAINPID";
+      ExecStop = "/run/current-system/sw/bin/kill -s QUIT $MAINPID";
+      Restart = "always";
+      RestartSec = 30;
+      PIDFile = "/srv/huginn/huginn/tmp/pids/unicorn.pid";
+    };
+  };
+
+  systemd.services.huginn-jobs = {
+    enable = true;
+    description = "Huginn Jobs";
+    path = [ pkgs.bash ];
+    after = [ "network.target" ];
+    wants = [ "network.target" ];
+    environment = {
+      HOME = "/srv/huginn";
+      NIX_PATH = "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos/nixpkgs:nixos-config=/etc/nixos/configuration.nix:/nix/var/nix/profiles/per-user/root/channels";
+      TEMPDIR = "/srv/huginn/huginn/tmp";
+    };
+    serviceConfig = {
+      WorkingDirectory = "/srv/huginn/huginn";
+      ExecStart = "/run/current-system/sw/bin/nix-shell . --run 'bundle exec dotenv rails runner bin/threaded.rb'";
       Restart = "always";
       RestartSec = 30;
     };
@@ -86,7 +108,7 @@
 
     appendHttpConfig = ''
       upstream huginn {
-        server unix:/srv/huginn/tmp/sockets/unicorn.socket fail_timeout=0;
+        server unix:/srv/huginn/huginn/tmp/sockets/unicorn.socket fail_timeout=0;
       }
     '';
 
@@ -96,7 +118,7 @@
         forceSSL = true;
         enableACME = true;
 
-        root = "/srv/huginn/public";
+        root = "/srv/huginn/huginn/public";
         extraConfig = ''
           client_max_body_size 20m;
           error_page 502 /502.html;
@@ -120,6 +142,14 @@
               proxy_set_header    X-Forwarded-For     $proxy_add_x_forwarded_for;
               proxy_set_header    X-Forwarded-Proto   $scheme;
               proxy_set_header    X-Frame-Options     SAMEORIGIN;
+            '';
+          };
+          "~ ^/(assets)/" = {
+            root = "/srv/huginn/huginn/public";
+            extraConfig = ''
+              gzip_static on; # to serve pre-gzipped version
+              expires max;
+              add_header Cache-Control public;
             '';
           };
         };
