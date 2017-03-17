@@ -187,6 +187,7 @@
     gitAndTools.git-annex
     glxinfo
     gnome3.adwaita-icon-theme
+    gnome3.dconf
     gnome3.gnome_themes_standard
     heroku
     hexchat
@@ -206,12 +207,14 @@
     phantomjs2
     pwgen
     rake
+    ranger
     redshift
     ruby
     sqlite-interactive
     sylpheed
     texlive.combined.scheme-full
     tig
+    tmate
     universal-ctags
     usbutils
     virtmanager
