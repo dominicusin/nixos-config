@@ -180,6 +180,7 @@
     awscli
     bundler
     chromium
+    copyq
     dmenu
     dunst
     emacs25
