@@ -197,6 +197,7 @@
     glxinfo
     gnome3.adwaita-icon-theme
     gnome3.dconf
+    gnome3.gedit
     gnome3.gnome_themes_standard
     heroku
     hexchat
@@ -204,7 +205,6 @@
     i3status
     jq
     keychain
-    leafpad
     libnotify
     libreoffice
     mplayer
