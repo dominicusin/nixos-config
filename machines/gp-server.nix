@@ -6,6 +6,7 @@
       <nixpkgs/nixos/modules/virtualisation/amazon-image.nix>
       ../config/base.nix
       ../private/hosts.nix
+      ../private/gp-server-tahoe-lafs.nix
     ];
 
   #############################################################################
@@ -22,7 +23,7 @@
   ### Networking
 
   networking.hostName = "gp-server";
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
+  networking.firewall.allowedTCPPorts = [ 80 443 3457 3458 ];
 
   #############################################################################
   ### Users
@@ -37,6 +38,8 @@
   #############################################################################
   ### Services
 
+  services.jenkins.enable = true;
+
   services.postgresql = {
     enable = true;
     authentication =  pkgs.lib.mkOverride 10 ''
@@ -45,8 +48,6 @@
       host  all all ::1/128      md5
     '';
   };
-
-  services.jenkins.enable = true;
 
   # Huginn
   systemd.services.huginn-web = {

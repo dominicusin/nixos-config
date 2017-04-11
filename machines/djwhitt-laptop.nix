@@ -15,6 +15,7 @@
       ../private/mail.nix
       ../private/wifi.nix
       ../private/hosts.nix
+      ../private/djwhitt-laptop-tahoe-lafs.nix
     ];
 
   #############################################################################
@@ -59,6 +60,7 @@
   ### Networking
 
   networking.hostName = "djwhitt-laptop"; # Define your hostname.
+  networking.firewall.allowedTCPPorts = [ 3457 3458 ];
   networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   #############################################################################
