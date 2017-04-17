@@ -6,7 +6,7 @@
       <nixpkgs/nixos/modules/virtualisation/amazon-image.nix>
       ../config/base.nix
       ../private/hosts.nix
-      ../private/gp-server-tahoe-lafs.nix
+      ../private/ec2-gp-server-tahoe-lafs.nix
     ];
 
   #############################################################################
@@ -22,7 +22,7 @@
   #############################################################################
   ### Networking
 
-  networking.hostName = "gp-server";
+  networking.hostName = "ec2-gp-server";
   networking.firewall.allowedTCPPorts = [ 80 443 3457 3458 ];
 
   #############################################################################

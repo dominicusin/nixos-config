@@ -221,6 +221,7 @@
     ranger
     redshift
     ruby
+    slack
     sqlite-interactive
     sylpheed
     texlive.combined.scheme-full
