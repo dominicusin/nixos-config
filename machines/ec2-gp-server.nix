@@ -64,13 +64,8 @@
     path = [ pkgs.bash ];
     after = [ "network.target" ];
     wants = [ "network.target" ];
-    environment = {
-      HOME = "/srv/fedwiki";
-      NIX_PATH = "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos/nixpkgs:nixos-config=/etc/nixos/configuration.nix:/nix/var/nix/profiles/per-user/root/channels";
-    };
     serviceConfig = {
-      WorkingDirectory = "/srv/fedwiki";
-      ExecStart = "/run/current-system/sw/bin/nix-shell . --run /srv/fedwiki/.npm-packages/bin/wiki";
+      ExecStart = "/var/setuid-wrappers/su - -c 'nix-shell . --run /srv/fedwiki/.npm-packages/bin/wiki' fedwiki";
       Restart = "always";
       RestartSec = 30;
     };
@@ -83,14 +78,8 @@
     path = [ pkgs.bash ];
     after = [ "network.target" ];
     wants = [ "network.target" ];
-    environment = {
-      HOME = "/srv/huginn";
-      NIX_PATH = "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos/nixpkgs:nixos-config=/etc/nixos/configuration.nix:/nix/var/nix/profiles/per-user/root/channels";
-      TMPDIR = "/srv/huginn/huginn/tmp";
-    };
     serviceConfig = {
-      WorkingDirectory = "/srv/huginn/huginn";
-      ExecStart = "/run/current-system/sw/bin/nix-shell . --run 'bundle exec dotenv unicorn -c config/unicorn.rb'";
+      ExecStart = "/var/setuid-wrappers/su - -c \"cd huginn && nix-shell . --run 'bundle exec dotenv unicorn -c config/unicorn.rb' \" huginn";
       ExecReload = "/run/current-system/sw/bin/kill -s USR2 $MAINPID";
       ExecStop = "/run/current-system/sw/bin/kill -s QUIT $MAINPID";
       Restart = "always";
@@ -105,14 +94,23 @@
     path = [ pkgs.bash ];
     after = [ "network.target" ];
     wants = [ "network.target" ];
-    environment = {
-      HOME = "/srv/huginn";
-      NIX_PATH = "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos/nixpkgs:nixos-config=/etc/nixos/configuration.nix:/nix/var/nix/profiles/per-user/root/channels";
-      TEMPDIR = "/srv/huginn/huginn/tmp";
-    };
     serviceConfig = {
-      WorkingDirectory = "/srv/huginn/huginn";
-      ExecStart = "/run/current-system/sw/bin/nix-shell . --run 'bundle exec dotenv rails runner bin/threaded.rb'";
+      ExecStart = "/var/setuid-wrappers/su - -c \"cd huginn && nix-shell . --run 'bundle exec dotenv rails runner bin/threaded.rb' \" huginn";
+      Restart = "always";
+      RestartSec = 30;
+    };
+  };
+
+  # Memocorder
+  systemd.services.memocorder = {
+    enable = true;
+    description = "Memocorder Server";
+    path = [ pkgs.bash ];
+    after = [ "network.target" ];
+    wants = [ "network.target" ];
+    serviceConfig = {
+      WorkingDirectory = "/srv/memocorder/memocorder";
+      ExecStart = "/var/setuid-wrappers/su - -c \"cd memocorder && nix-shell . --run 'boot run' \" memocorder";
       Restart = "always";
       RestartSec = 30;
     };
