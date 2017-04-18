@@ -214,6 +214,7 @@
     nodejs
     obnam
     openjdk
+    openssl
     pciutils
     phantomjs2
     pwgen
