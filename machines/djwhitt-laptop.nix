@@ -83,8 +83,9 @@
       local all all              ident
       host  all all 127.0.0.1/32 md5
       host  all all ::1/128      md5
-      '';
+    '';
   };
+  services.redis.enable = true;
   services.printing.enable = true;
 
   #############################################################################
