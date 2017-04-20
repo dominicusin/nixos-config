@@ -47,7 +47,7 @@
   ### Services
 
   services.jenkins.enable = true;
-
+  services.redis.enable = true;
   services.postgresql = {
     enable = true;
     authentication = pkgs.lib.mkOverride 10 ''
