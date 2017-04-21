@@ -232,6 +232,7 @@
     universal-ctags
     usbutils
     virtmanager
+    wpa_supplicant_gui
     x11_ssh_askpass
     xautolock
     xfontsel
