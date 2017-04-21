@@ -72,34 +72,34 @@
   };
 
   # Huginn
-  systemd.services.huginn-web = {
-    enable = true;
-    description = "Huginn Web Server";
-    path = [ pkgs.bash ];
-    after = [ "network.target" ];
-    wants = [ "network.target" ];
-    serviceConfig = {
-      ExecStart = "/var/setuid-wrappers/su - -c \"cd huginn && nix-shell . --run 'bundle exec dotenv unicorn -c config/unicorn.rb' \" huginn";
-      ExecReload = "/run/current-system/sw/bin/kill -s USR2 $MAINPID";
-      ExecStop = "/run/current-system/sw/bin/kill -s QUIT $MAINPID";
-      Restart = "always";
-      RestartSec = 30;
-      PIDFile = "/srv/huginn/huginn/tmp/pids/unicorn.pid";
-    };
-  };
+  # systemd.services.huginn-web = {
+  #   enable = true;
+  #   description = "Huginn Web Server";
+  #   path = [ pkgs.bash ];
+  #   after = [ "network.target" ];
+  #   wants = [ "network.target" ];
+  #   serviceConfig = {
+  #     ExecStart = "/var/setuid-wrappers/su - -c \"cd huginn && nix-shell . --run 'bundle exec dotenv unicorn -c config/unicorn.rb' \" huginn";
+  #     ExecReload = "/run/current-system/sw/bin/kill -s USR2 $MAINPID";
+  #     ExecStop = "/run/current-system/sw/bin/kill -s QUIT $MAINPID";
+  #     Restart = "always";
+  #     RestartSec = 30;
+  #     PIDFile = "/srv/huginn/huginn/tmp/pids/unicorn.pid";
+  #   };
+  # };
 
-  systemd.services.huginn-jobs = {
-    enable = true;
-    description = "Huginn Jobs";
-    path = [ pkgs.bash ];
-    after = [ "network.target" ];
-    wants = [ "network.target" ];
-    serviceConfig = {
-      ExecStart = "/var/setuid-wrappers/su - -c \"cd huginn && nix-shell . --run 'bundle exec dotenv rails runner bin/threaded.rb' \" huginn";
-      Restart = "always";
-      RestartSec = 30;
-    };
-  };
+  # systemd.services.huginn-jobs = {
+  #   enable = true;
+  #   description = "Huginn Jobs";
+  #   path = [ pkgs.bash ];
+  #   after = [ "network.target" ];
+  #   wants = [ "network.target" ];
+  #   serviceConfig = {
+  #     ExecStart = "/var/setuid-wrappers/su - -c \"cd huginn && nix-shell . --run 'bundle exec dotenv rails runner bin/threaded.rb' \" huginn";
+  #     Restart = "always";
+  #     RestartSec = 30;
+  #   };
+  # };
 
   # Memocorder
   systemd.services.memocorder = {
