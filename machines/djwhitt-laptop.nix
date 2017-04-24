@@ -98,7 +98,7 @@
     uid = 1000;
     home = "/home/djwhitt";
     shell = "/run/current-system/sw/bin/zsh";
-    extraGroups = [ "libvirtd" "wheel" ];
+    extraGroups = [ "libvirtd" "networkmanager" "wheel" ];
   };
 
   #############################################################################
