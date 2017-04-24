@@ -13,7 +13,6 @@
       ../hardware-configuration.nix
       ../config/base.nix
       ../private/mail.nix
-      ../private/wifi.nix
       ../private/hosts.nix
       ../private/djwhitt-laptop-tahoe-lafs.nix
     ];
@@ -38,6 +37,7 @@
 
   hardware.enableAllFirmware = true;
 
+  hardware.bluetooth.enable = true;
   hardware.pulseaudio = {
     enable = true;
     support32Bit = true;
@@ -60,8 +60,8 @@
   ### Networking
 
   networking.hostName = "djwhitt-laptop"; # Define your hostname.
-  networking.firewall.allowedTCPPorts = [ 3457 3458 ];
-  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.firewall.trustedInterfaces = [ "zt0" ];
+  networking.networkmanager.enable = true;
 
   #############################################################################
   ### Power Management
@@ -189,6 +189,7 @@
     (hunspellWithDicts (with hunspellDicts; [en-us]))
     anki
     awscli
+    blueman
     bundler
     chromium
     copyq
@@ -211,6 +212,7 @@
     libnotify
     libreoffice
     mplayer
+    networkmanagerapplet
     nix-repl
     nodejs
     obnam
@@ -224,6 +226,7 @@
     redshift
     ruby
     slack
+    smplayer
     sqlite-interactive
     sylpheed
     texlive.combined.scheme-full
@@ -232,7 +235,6 @@
     universal-ctags
     usbutils
     virtmanager
-    wpa_supplicant_gui
     x11_ssh_askpass
     xautolock
     xfontsel
