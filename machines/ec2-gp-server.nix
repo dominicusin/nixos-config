@@ -29,10 +29,6 @@
   ### Users
 
   users.extraUsers = {
-    fedwiki = {
-      home = "/srv/fedwiki";
-      shell = pkgs.bashInteractive;
-    };
     memocorder = {
       home = "/srv/memocorder";
       shell = pkgs.bashInteractive;
@@ -51,20 +47,6 @@
       host  all all 127.0.0.1/32 md5
       host  all all ::1/128      md5
     '';
-  };
-
-  # Federated Wiki
-  systemd.services.fedwiki = {
-    enable = true;
-    description = "Federated Wiki Server";
-    path = [ pkgs.bash ];
-    after = [ "network.target" ];
-    wants = [ "network.target" ];
-    serviceConfig = {
-      ExecStart = "/var/setuid-wrappers/su - -c 'nix-shell . --run /srv/fedwiki/.npm-packages/bin/wiki' fedwiki";
-      Restart = "always";
-      RestartSec = 30;
-    };
   };
 
   # Memocorder
@@ -88,9 +70,6 @@
   security.acme.certs = {
     "jenkins.spcom.org" = {
       email = "jenkins@spcom.org";
-    };
-    "wiki.djwhitt.com" = {
-      email = "admin@djwhitt.com";
     };
   };
 
