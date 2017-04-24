@@ -16,8 +16,11 @@ sync-remote:
 	ssh root@memocorder-prod ln -sf /etc/nixos/machines/memocorder-prod.nix /etc/nixos/configuration.nix
 	rsync -r ./ root@home-gp-server:/etc/nixos/
 	ssh root@home-gp-server ln -sf /etc/nixos/machines/home-gp-server.nix /etc/nixos/configuration.nix
+	rsync -r ./ root@tahoe-us-east-2c:/etc/nixos/
+	ssh root@tahoe-us-east-2c ln -sf /etc/nixos/machines/tahoe-us-east-2c.nix /etc/nixos/configuration.nix
 
 switch-remote: sync-remote
 	ssh root@ec2-gp-server nixos-rebuild switch
 	ssh root@memocorder-prod nixos-rebuild switch
 	ssh root@home-gp-server nixos-rebuild switch
+	ssh root@tahoe-us-east-2c nixos-rebuild switch
