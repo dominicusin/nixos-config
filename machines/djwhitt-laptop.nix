@@ -98,7 +98,7 @@
     uid = 1000;
     home = "/home/djwhitt";
     shell = "/run/current-system/sw/bin/zsh";
-    extraGroups = [ "libvirtd" "networkmanager" "wheel" ];
+    extraGroups = [ "libvirtd" "networkmanager" "wheel" "whireshark" ];
   };
 
   #############################################################################
@@ -126,7 +126,7 @@
 
   # Blank screen after 10 minutes
   services.xserver.serverFlagsSection = ''
-    Option "BlankTime" "0"
+    Option "BlankTime" "10"
     Option "StandbyTime" "0"
     Option "SuspendTime" "0"
     Option "OffTime" "10"
@@ -161,8 +161,14 @@
   #############################################################################
   ### Packages
 
-  programs.zsh.enable = true;
-  programs.ssh.startAgent = true;
+  programs = {
+    chromium.enable = true;
+    java.enable = true;
+    mtr.enable = true;
+    ssh.startAgent = true;
+    wireshark.enable = true;
+    zsh.enable = true;
+  };
 
   virtualisation.libvirtd = {
     enable = true;
@@ -178,9 +184,13 @@
     };
 
     # Remove once fixed package is available
-    packageOverrides = pkgs : {
-      heroku = pkgs.callPackage ../pkgs/heroku/default.nix { };
-    };
+    #packageOverrides = pkgs : {
+    #  heroku = pkgs.callPackage ../pkgs/heroku/default.nix { };
+    #};
+  };
+
+  security.wrappers = {
+    slock.source = "${pkgs.slock}/bin/slock";
   };
 
   # List packages installed in system profile. To search by name, run:
@@ -201,22 +211,18 @@
     glxinfo
     gnome3.adwaita-icon-theme
     gnome3.dconf
-    gnome3.gedit
     gnome3.gnome_themes_standard
-    heroku
     hexchat
-    i3lock-fancy
     i3status
     jq
     keychain
+    leafpad
     libnotify
     libreoffice
-    mplayer
     networkmanagerapplet
     nix-repl
     nodejs
     obnam
-    openjdk
     openssl
     pciutils
     phantomjs2
@@ -226,6 +232,7 @@
     redshift
     ruby
     slack
+    slock
     smplayer
     sqlite-interactive
     sylpheed
@@ -235,15 +242,16 @@
     universal-ctags
     usbutils
     virtmanager
+    wireshark
     x11_ssh_askpass
-    xautolock
     xfontsel
     xorg.xbacklight
+    xss-lock
     zip
   ];
 
   environment.pathsToLink = [ "/include" ];
 
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "16.09";
+  system.stateVersion = "17.03";
 }
