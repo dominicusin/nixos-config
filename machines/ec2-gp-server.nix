@@ -5,6 +5,7 @@
     [
       <nixpkgs/nixos/modules/virtualisation/amazon-image.nix>
       ../config/base.nix
+      ../config/tahoe.nix
       ../private/hosts.nix
       ../private/ec2-gp-server-tahoe-lafs.nix
     ];

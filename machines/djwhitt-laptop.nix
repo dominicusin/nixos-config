@@ -12,6 +12,7 @@
     [ # Include the results of the hardware scan.
       ../hardware-configuration.nix
       ../config/base.nix
+      ../config/tahoe.nix
       ../private/mail.nix
       ../private/hosts.nix
       ../private/djwhitt-laptop-tahoe-lafs.nix

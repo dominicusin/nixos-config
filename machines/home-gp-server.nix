@@ -9,6 +9,7 @@
     [
       ../hardware-configuration.nix
       ../config/base.nix
+      ../config/tahoe.nix
       ../private/mail.nix
       ../private/hosts.nix
       ../private/home-gp-server-tahoe-lafs.nix
