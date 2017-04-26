@@ -41,6 +41,7 @@
   hardware.bluetooth.enable = true;
   hardware.pulseaudio = {
     enable = true;
+    package = pkgs.pulseaudioFull;
     support32Bit = true;
   };
 
@@ -77,6 +78,7 @@
     nssmdns = true;
   };
   services.bitlbee.enable = true;
+  services.gnome3.at-spi2-core.enable = true;
   services.openssh.enable = true;
   services.postgresql = {
     enable = true;
@@ -225,6 +227,7 @@
     nodejs
     obnam
     openssl
+    pavucontrol
     pciutils
     phantomjs2
     pwgen
