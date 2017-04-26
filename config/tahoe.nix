@@ -32,7 +32,7 @@ in
           enabled = ${if settings.storage.enable then "true" else "false"}
           reserved_space = ${settings.storage.reservedSpace}
           expire.enabled = true
-          expire.mode = 'cutoff-date'
+          expire.mode = age
           [helper]
           enabled = ${if settings.helper.enable then "true" else "false"}
           [sftpd]
