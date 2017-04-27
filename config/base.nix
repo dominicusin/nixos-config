@@ -4,6 +4,8 @@
   #############################################################################
   ### Networking
 
+  networking.firewall.allowedUDPPorts = [ 9993 ];
+
   systemd.services.zerotier-one = {
     enable = true;
     description = "ZeroTier One";
