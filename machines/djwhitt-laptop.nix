@@ -216,6 +216,7 @@
     gnome3.adwaita-icon-theme
     gnome3.dconf
     gnome3.gnome_themes_standard
+    gnuplot
     hexchat
     i3status
     jq
