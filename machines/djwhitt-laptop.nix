@@ -210,6 +210,7 @@
     dunst
     emacs25
     evince
+    exercism
     gitAndTools.git-annex
     glxinfo
     gnome3.adwaita-icon-theme
