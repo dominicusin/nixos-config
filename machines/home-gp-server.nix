@@ -17,7 +17,6 @@
 
   boot.loader.grub.device = "/dev/sda";
 
-
   #############################################################################
   ### Localization
 
@@ -35,12 +34,42 @@
   networking.hostName = "home-gp-server";
   networking.firewall.allowedTCPPorts = [ 3457 3458 ];
 
-  # environment.systemPackages = with pkgs; [];
+  #############################################################################
+  ### Users
+
+  users.extraUsers = {
+    camlistore = {
+      home = "/srv/camlistore";
+      shell = pkgs.bashInteractive;
+    };
+  };
 
   #############################################################################
   ### Services
 
   services.openssh.enable = true;
+
+  # Camlistore
+  systemd.services.memocorder = {
+    enable = true;
+    description = "Camlistore";
+    path = [ pkgs.bash ];
+    after = [ "network.target" ];
+    wants = [ "network.target" ];
+    serviceConfig = {
+      WorkingDirectory = "/srv/camlistore";
+      ExecStart = "/var/setuid-wrappers/su - -c camlistored camlistore";
+      Restart = "always";
+      RestartSec = 30;
+    };
+  };
+
+  #############################################################################
+  ### Packages
+
+  environment.systemPackages = with pkgs; [
+    camlistore
+  ];
 
   #############################################################################
 

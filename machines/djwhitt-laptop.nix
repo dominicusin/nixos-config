@@ -186,9 +186,9 @@
       enablePepperPDF = true;
     };
 
-    # Remove once fixed package is available
     #packageOverrides = pkgs : {
-    #  heroku = pkgs.callPackage ../pkgs/heroku/default.nix { };
+    #  # more up-to-date Camlistore package
+    #  camlistore = pkgs.callPackage ../pkgs/camlistore/default.nix { };
     #};
   };
 
@@ -204,6 +204,7 @@
     awscli
     blueman
     bundler
+    camlistore
     chromium
     copyq
     dmenu
