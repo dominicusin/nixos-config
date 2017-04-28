@@ -50,7 +50,7 @@
   services.openssh.enable = true;
 
   # Camlistore
-  systemd.services.memocorder = {
+  systemd.services.camlistore = {
     enable = true;
     description = "Camlistore";
     path = [ pkgs.bash ];
