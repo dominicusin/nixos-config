@@ -65,7 +65,7 @@
         port = 443;
         enableSSL = true;
         forceSSL = true;
-        sslCertificate = "/srv/memocorder/certs/memocorder_com.crt";
+        sslCertificate = "/srv/memocorder/certs/memocorder_com-bundle.crt";
         sslCertificateKey = "/srv/memocorder/certs/memocorder_com.key";
 
         locations = {
