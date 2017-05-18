@@ -206,7 +206,6 @@
     bundler
     camlistore
     chromium
-    copyq
     dmenu
     dunst
     emacs25
@@ -219,6 +218,7 @@
     gnome3.gnome_terminal
     gnome3.gnome_themes_standard
     gnuplot
+    graphviz
     hexchat
     i3status
     jq
