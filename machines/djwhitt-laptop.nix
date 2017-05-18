@@ -216,6 +216,7 @@
     glxinfo
     gnome3.adwaita-icon-theme
     gnome3.dconf
+    gnome3.gnome_terminal
     gnome3.gnome_themes_standard
     gnuplot
     hexchat
@@ -234,6 +235,7 @@
     pciutils
     phantomjs2
     pwgen
+    python27Packages.syncthing-gtk
     rake
     ranger
     redshift
@@ -243,6 +245,7 @@
     smplayer
     sqlite-interactive
     sylpheed
+    syncthing
     texlive.combined.scheme-full
     tig
     tmate
