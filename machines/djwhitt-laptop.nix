@@ -218,6 +218,7 @@
     gnome3.gnome_terminal
     gnome3.gnome_themes_standard
     gnuplot
+    go
     graphviz
     hexchat
     i3status
