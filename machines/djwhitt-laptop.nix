@@ -186,10 +186,11 @@
       enablePepperPDF = true;
     };
 
-    #packageOverrides = pkgs : {
-    #  # more up-to-date Camlistore package
-    #  camlistore = pkgs.callPackage ../pkgs/camlistore/default.nix { };
-    #};
+    packageOverrides = pkgs : {
+      lumo = pkgs.callPackage ../pkgs/lumo/default.nix { };
+      # more up-to-date Camlistore package
+      # camlistore = pkgs.callPackage ../pkgs/camlistore/default.nix { };
+    };
   };
 
   security.wrappers = {
@@ -202,6 +203,7 @@
     (hunspellWithDicts (with hunspellDicts; [en-us]))
     anki
     awscli
+    binutils
     blueman
     bundler
     camlistore
@@ -211,6 +213,7 @@
     emacs25
     evince
     exercism
+    gimp
     gitAndTools.git-annex
     glxinfo
     gnome3.adwaita-icon-theme
@@ -227,11 +230,13 @@
     leafpad
     libnotify
     libreoffice
+    lumo
     networkmanagerapplet
     nix-repl
     nodejs
     obnam
     openssl
+    patchelf
     pavucontrol
     pciutils
     phantomjs2
