@@ -37,7 +37,6 @@
   ];
 
   hardware.enableAllFirmware = true;
-
   hardware.bluetooth.enable = true;
   hardware.pulseaudio = {
     enable = true;
@@ -101,7 +100,7 @@
     uid = 1000;
     home = "/home/djwhitt";
     shell = "/run/current-system/sw/bin/zsh";
-    extraGroups = [ "libvirtd" "networkmanager" "wheel" "whireshark" ];
+    extraGroups = [ "docker" "libvirtd" "networkmanager" "wheel" "whireshark" ];
   };
 
   #############################################################################
@@ -173,9 +172,15 @@
     zsh.enable = true;
   };
 
-  virtualisation.libvirtd = {
-    enable = true;
-    enableKVM = true;
+  virtualisation = {
+    docker = {
+      enable = true;
+      enableOnBoot = true;
+    };
+    libvirtd = {
+      enable = true;
+      enableKVM = true;
+    };
   };
 
   nixpkgs.config = {
