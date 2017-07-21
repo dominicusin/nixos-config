@@ -24,6 +24,7 @@
 
   environment.systemPackages = with pkgs; [
     (hunspellWithDicts (with hunspellDicts; [en-us]))
+    ansible
     borgbackup
     git
     gnumake
