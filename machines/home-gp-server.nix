@@ -9,10 +9,8 @@
     [
       ../hardware-configuration.nix
       ../config/base.nix
-      ../config/tahoe.nix
       ../private/mail.nix
       ../private/hosts.nix
-      ../private/home-gp-server-tahoe-lafs.nix
     ];
 
   boot.loader.grub.device = "/dev/sda";
@@ -37,11 +35,13 @@
   #############################################################################
   ### Users
 
-  users.extraUsers = {
-    camlistore = {
-      home = "/srv/camlistore";
-      shell = pkgs.bashInteractive;
-    };
+  security.sudo.wheelNeedsPassword = false;
+
+  users.extraUsers.djwhitt = {
+    isNormalUser = true;
+    home = "/home/djwhitt";
+    shell = "/run/current-system/sw/bin/bash";
+    extraGroups = [ "wheel" ];
   };
 
   #############################################################################
@@ -49,30 +49,8 @@
 
   services.openssh.enable = true;
 
-  # Camlistore
-  systemd.services.camlistore = {
-    enable = true;
-    description = "Camlistore";
-    path = [ pkgs.bash ];
-    after = [ "network.target" ];
-    wants = [ "network.target" ];
-    serviceConfig = {
-      WorkingDirectory = "/srv/camlistore";
-      ExecStart = "/var/setuid-wrappers/su - -c camlistored camlistore";
-      Restart = "always";
-      RestartSec = 30;
-    };
-  };
-
-  #############################################################################
-  ### Packages
-
-  environment.systemPackages = with pkgs; [
-    camlistore
-  ];
-
   #############################################################################
 
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "16.09";
+  system.stateVersion = "17.03";
 }

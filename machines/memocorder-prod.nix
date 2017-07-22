@@ -27,7 +27,15 @@
   #############################################################################
   ### Users
 
+  security.sudo.wheelNeedsPassword = false;
+
   users.extraUsers = {
+    djwhitt = {
+      isNormalUser = true;
+      home = "/home/djwhitt";
+      shell = "/run/current-system/sw/bin/bash";
+      extraGroups = [ "wheel" ];
+    };
     memocorder = {
       home = "/srv/memocorder";
       shell = pkgs.bashInteractive;

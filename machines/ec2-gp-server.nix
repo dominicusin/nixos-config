@@ -5,9 +5,7 @@
     [
       <nixpkgs/nixos/modules/virtualisation/amazon-image.nix>
       ../config/base.nix
-      ../config/tahoe.nix
       ../private/hosts.nix
-      ../private/ec2-gp-server-tahoe-lafs.nix
     ];
 
   #############################################################################
@@ -29,7 +27,15 @@
   #############################################################################
   ### Users
 
+  security.sudo.wheelNeedsPassword = false;
+
   users.extraUsers = {
+    djwhitt = {
+      isNormalUser = true;
+      home = "/home/djwhitt";
+      shell = "/run/current-system/sw/bin/bash";
+      extraGroups = [ "wheel" ];
+    };
     memocorder = {
       home = "/srv/memocorder";
       shell = pkgs.bashInteractive;

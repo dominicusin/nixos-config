@@ -36,6 +36,7 @@
     mr
     nmap
     psmisc
+    python2Full
     rcm
     silver-searcher
     termite # needed for terminfo even on headless systems
