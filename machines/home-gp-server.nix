@@ -61,6 +61,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    ansible
     awscli
     bundler
     emacs25
