@@ -39,9 +39,10 @@
 
   users.extraUsers.djwhitt = {
     isNormalUser = true;
+    uid = 1000;
     home = "/home/djwhitt";
-    shell = "/run/current-system/sw/bin/bash";
-    extraGroups = [ "wheel" ];
+    shell = "/run/current-system/sw/bin/zsh";
+    extraGroups = [ "docker" "wheel" ];
   };
 
   #############################################################################
@@ -53,6 +54,26 @@
       enableOnBoot = true;
     };
   };
+
+  programs = {
+    java.enable = true;
+    zsh.enable = true;
+  };
+
+  environment.systemPackages = with pkgs; [
+    awscli
+    bundler
+    emacs25
+    go
+    graphviz
+    nix-repl
+    nodejs
+    pwgen
+    ranger
+    sqlite-interactive
+    universal-ctags
+    zip
+  ];
 
   #############################################################################
   ### Services

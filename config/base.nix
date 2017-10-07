@@ -39,7 +39,6 @@
     python2Full
     rcm
     silver-searcher
-    sshfs
     termite # needed for terminfo even on headless systems
     tmux
     unzip
