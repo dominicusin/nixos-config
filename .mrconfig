@@ -1,0 +1,3 @@
+[private]
+checkout = git clone djwhitt@git.spcom.org:/volume1/homes/djwhitt/git/nixos-config-private.git private
+skip = ! spcom
