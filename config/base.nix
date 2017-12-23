@@ -29,6 +29,7 @@
 
   environment.systemPackages = with pkgs; [
     (hunspellWithDicts (with hunspellDicts; [en-us]))
+    bind
     borgbackup
     git
     gnumake
