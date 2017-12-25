@@ -4,8 +4,8 @@
   services = {
     xrdp = {
       enable = true;
-      defaultWindowManager = "xfce4-session";
+      defaultWindowManager = "openbox-session";
     };
-    xserver.desktopManager.xfce.enable = true;
+    xserver.windowManager.openbox.enable = true;
   };
 }
