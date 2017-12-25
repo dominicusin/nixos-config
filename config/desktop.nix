@@ -4,6 +4,8 @@
   #############################################################################
   ### Virtualisation
 
+  boot.kernelModules = [ "virtio" ];
+
   virtualisation = {
     libvirtd = {
       enable = true;
@@ -37,6 +39,9 @@
     conflicts = [ "exit.target" ];
   };
 
+  services.gnome3.at-spi2-core.enable = true;
+  services.gnome3.gnome-keyring.enable = true;
+
   #############################################################################
   ### Fonts
 
@@ -66,7 +71,6 @@
     ssh.startAgent = true;
     wireshark.enable = true;
   };
-
 
   environment.systemPackages = with pkgs; [
     (hunspellWithDicts (with hunspellDicts; [en-us]))

@@ -13,6 +13,8 @@
       ../hardware-configuration.nix
       ../config/base.nix
       ../config/desktop.nix
+      ../config/yubikey.nix
+      ../config/xrdp-server.nix
       #../private/mail.nix
       #../private/hosts.nix
     ];
@@ -23,8 +25,6 @@
   # Use the systemd-boot EFI boot loader.
   #boot.loader.systemd-boot.enable = true;
   #boot.loader.efi.canTouchEfiVariables = true;
-
-  boot.kernelModules = [ "virtio" ];
 
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
@@ -68,7 +68,7 @@
   #############################################################################
   ### Networking
 
-  networking.hostName = "lp-dwhittin-linux"; # Define your hostname.
+  networking.hostName = "lp-dwhittin-linux";
   networking.networkmanager.enable = true;
   networking.firewall.allowedTCPPorts = [ 3000 ];
 
@@ -85,11 +85,8 @@
     nssmdns = true;
   };
   #services.bitlbee.enable = true;
-  services.gnome3.at-spi2-core.enable = true;
-  services.gnome3.gnome-keyring.enable = true;
   services.openssh.enable = true;
   services.printing.enable = true;
-  services.xrdp.enable = true;
 
   #############################################################################
   ### Users
@@ -140,10 +137,6 @@
     allowUnfree = true;
   };
 
-  services.udev.packages = with pkgs; [
-    yubikey-personalization
-  ];
-
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
@@ -162,7 +155,6 @@
     keychain
     libnotify
     libreoffice
-    libu2f-host
     lz4
     nix-repl
     nodejs
@@ -185,13 +177,10 @@
     universal-ctags
     usbutils
     xfontsel
-    xrdp
-    yubikey-personalization
     zip
   ];
 
   environment.pathsToLink = [ "/include" ];
-
 
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "17.09";
