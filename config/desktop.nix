@@ -72,6 +72,10 @@
     wireshark.enable = true;
   };
 
+  security.wrappers = {
+    slock.source = "${pkgs.slock}/bin/slock";
+  };
+
   environment.systemPackages = with pkgs; [
     (hunspellWithDicts (with hunspellDicts; [en-us]))
     anki
@@ -101,6 +105,7 @@
     python27Packages.syncthing-gtk
     redshift
     slack
+    slock
     smplayer
     sylpheed
     syncthing
