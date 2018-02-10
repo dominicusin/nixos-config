@@ -61,8 +61,8 @@
 
   nixpkgs.config = {
     chromium = {
-      #enablePepperFlash = true;
       enablePepperPDF = true;
+      enableNacl = true;
     };
   };
 
@@ -83,6 +83,7 @@
     atom
     blueman
     chromium
+    copyq
     dmenu
     dunst
     evince
@@ -111,6 +112,7 @@
     syncthing
     universal-ctags
     virtmanager
+    vlc
     wireshark
     x11_ssh_askpass
     xfontsel
