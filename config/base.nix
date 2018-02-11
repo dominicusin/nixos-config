@@ -25,13 +25,6 @@
   networking.firewall.allowedUDPPortRanges = [ { from = 60000; to = 61000; } ];
 
   #############################################################################
-  ### Services
-
-  services = {
-    tarsnap.enable = true;
-  };
-
-  #############################################################################
   ### Packages
 
   environment.systemPackages = with pkgs; [

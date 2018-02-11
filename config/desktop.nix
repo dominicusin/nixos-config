@@ -16,6 +16,25 @@
   #############################################################################
   ### Services
 
+  services = {
+    tarsnap = {
+      enable = true;
+      archives = {
+        home = {
+          directories = [ "/home" ];
+          period = "*-*-* 02:00:00";
+          excludes = [
+            "*/node_modules/*"
+            "*/tmp/*"
+            "/home/*/.dbus/"
+            "/home/*/.gvfs/"
+            "/home/*/.steam/"
+          ];
+        };
+      };
+    };
+  };
+
   # Blank screen after 10 minutes
   services.xserver.serverFlagsSection = ''
     Option "BlankTime" "10"
