@@ -9,6 +9,9 @@
     [
       ../hardware-configuration.nix
       ../config/base.nix
+      ../config/zerotier.nix
+      ../config/prometheus.nix
+      ../config/grafana.nix
       ../private/mail.nix
       ../private/hosts.nix
     ];
