@@ -15,6 +15,7 @@
       ../config/desktop.nix
       ../config/yubikey.nix
       ../config/xrdp-server.nix
+      ../config/zerotier.nix
       #../private/mail.nix
       #../private/hosts.nix
     ];
@@ -70,7 +71,6 @@
 
   networking.hostName = "lp-dwhittin-linux";
   networking.networkmanager.enable = true;
-  networking.firewall.allowedTCPPorts = [ 3000 ];
 
   #############################################################################
   ### Power Management
@@ -126,13 +126,6 @@
     zsh.enable = true;
   };
 
-  virtualisation = {
-    docker = {
-      enable = true;
-      enableOnBoot = true;
-    };
-  };
-
   nixpkgs.config = {
     allowUnfree = true;
   };
@@ -141,47 +134,38 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     (hunspellWithDicts (with hunspellDicts; [en-us]))
-    awscli
-    bash
     binutils
     bundler
+    clojure
+    easyrsa
     emacs25
     exercism
-    file
+    firefox
     gnuplot
     go
     graphviz
-    jq
-    keychain
-    libnotify
     libreoffice
     lz4
-    nix-repl
-    nodejs
-    obnam
+    nodejs-8_x
     openssl
     patchelf
     pavucontrol
-    pciutils
+    pcmanfm
     pinentry
-    pwgen
     rake
-    ranger
     ruby
     snappy
     sqlite-interactive
+    strongswan
     swiProlog
-    sylpheed
     tig
     tmate
     universal-ctags
-    usbutils
     xfontsel
-    zip
   ];
 
   environment.pathsToLink = [ "/include" ];
 
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "17.09";
+  system.stateVersion = "18.03";
 }

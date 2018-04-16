@@ -21,19 +21,12 @@
   #############################################################################
   ### Localization
 
-  i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "us";
-    defaultLocale = "en_US.UTF-8";
-  };
-
   time.timeZone = "US/Central";
 
   #############################################################################
   ### Networking
 
   networking.hostName = "home-gp-server";
-  networking.firewall.allowedTCPPorts = [ 3457 3458 ];
 
   #############################################################################
   ### Users
@@ -51,41 +44,22 @@
   #############################################################################
   ### Packages
 
-  virtualisation = {
-    docker = {
-      enable = true;
-      enableOnBoot = true;
-    };
-  };
-
   programs = {
     java.enable = true;
     zsh.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
-    ansible
-    awscli
-    bundler
     emacs25
     go
     graphviz
-    nix-repl
     nodejs
-    pwgen
-    ranger
     sqlite-interactive
     universal-ctags
-    zip
   ];
-
-  #############################################################################
-  ### Services
-
-  services.openssh.enable = true;
 
   #############################################################################
 
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "17.03";
+  system.stateVersion = "18.03";
 }
