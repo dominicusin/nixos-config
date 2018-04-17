@@ -13,6 +13,7 @@
       ../hardware-configuration.nix
       ../config/base.nix
       ../config/desktop.nix
+      ../config/desktop-i3.nix
       ../config/yubikey.nix
       ../config/xrdp-server.nix
       ../config/zerotier.nix

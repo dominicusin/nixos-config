@@ -50,8 +50,6 @@
     Option "OffTime" "10"
   '';
 
-  services.xserver.windowManager.i3.enable = true;
-
   services.redshift = {
     enable = true;
     latitude = "43.0731";
@@ -64,9 +62,6 @@
   systemd.user.services.redshift = {
     conflicts = [ "exit.target" ];
   };
-
-  services.gnome3.at-spi2-core.enable = true;
-  services.gnome3.gnome-keyring.enable = true;
 
   #############################################################################
   ### Fonts
@@ -98,32 +93,19 @@
     wireshark.enable = true;
   };
 
-  security.wrappers = {
-    slock.source = "${pkgs.slock}/bin/slock";
-  };
-
   environment.systemPackages = with pkgs; [
     (hunspellWithDicts (with hunspellDicts; [en-us]))
     alacritty
     anki
-    arandr
     atom
     blueman
     chromium
     copyq
-    dmenu
-    dunst
     evince
     freerdp
     gimp
     gitAndTools.git-annex
     glxinfo
-    gnome3.adwaita-icon-theme
-    gnome3.dconf
-    gnome3.dconf-editor
-    gnome3.gnome_keyring
-    gnome3.gnome_terminal
-    gnome3.gnome_themes_standard
     i3status
     keybase-gui
     leafpad
@@ -131,13 +113,10 @@
     libreoffice
     lightdm
     networkmanagerapplet
-    pamixer
-    pavucontrol
     pinentry
     python27Packages.syncthing-gtk
     redshift
     slack
-    slock
     smplayer
     syncthing
     universal-ctags
@@ -146,10 +125,8 @@
     wireshark
     x11_ssh_askpass
     xfontsel
-    xfontsel
     xorg.xbacklight
     xorg.xhost
     xorg.xwininfo
-    xss-lock
   ];
 }
