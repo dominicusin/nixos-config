@@ -10,8 +10,7 @@
       ../hardware-configuration.nix
       ../config/base.nix
       ../config/zerotier.nix
-      ../config/prometheus.nix
-      ../config/grafana.nix
+      ../config/sourcegraph.nix
       ../private/mail.nix
       ../private/hosts.nix
     ];
@@ -27,6 +26,7 @@
   ### Networking
 
   networking.hostName = "home-gp-server";
+  networking.firewall.allowedTCPPorts = [ 3000 7080 ];
 
   #############################################################################
   ### Users
@@ -50,6 +50,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    docker_compose
     emacs25
     go
     graphviz
