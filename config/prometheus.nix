@@ -1,72 +1,36 @@
 { config, pkgs, ... }:
 
 {
-  services = {
-    prometheus = {
-      enable = true;
-      extraFlags = [ "-log.level=debug" ];
-      exporters.blackbox = {
-        enable = true;
-        configFile = "/etc/prometheus/blackbox.yml";
-      };
-      scrapeConfigs = [
-        {
-          job_name ="prometheus";
-          scrape_interval = "10s";
-          static_configs = [
-            {
-              targets = [
-                "localhost:9090"
-              ];
-              labels = {
-                alias = "home-gp-server";
-              };
-            }
-          ];
-        }
-        {
-          job_name ="ping";
-          scrape_interval = "5s";
-          metrics_path = "/probe";
-          params = {
-            module = ["icmp"];
-          };
-          static_configs = [
-            {
-              targets = [
-                "chromecast"
-                "diskstation"
-                "gliese"
-                "lp-dwhittin-linux"
-                "roku"
-              ];
-              labels = {
-                alias = "lan";
-              };
-            }
-          ];
-          relabel_configs = [
-            {
-              source_labels = [ "__address__" ];
-              regex = "(.*)(:80)?";
-              target_label = "__param_target";
-              replacement = "\${1}";
-            }
-            {
-              source_labels = [ "__param_target" ];
-              regex = "(.*)";
-              target_label = "instance";
-              replacement = "\${1}";
-            }
-            {
-              source_labels = [];
-              regex = ".*";
-              target_label = "__address__";
-              replacement = "127.0.0.1:9115";
-            }
-          ];
-        }
-      ];
+  systemd.services.prometheus = {
+    description = "prometheus";
+    after = [ "network.target" ];
+    serviceConfig = {
+      ExecStart = ''
+        ${pkgs.docker}/bin/docker run \
+          --rm --network host \
+          -v /opt/prometheus/etc:/etc/prometheus \
+          -v /opt/prometheus/data:/prometheus \
+          prom/prometheus:v2.2.1
+      '';
+    };
+  };
+
+  systemd.services.node-exporter = {
+    description = "node-exporter";
+    after = [ "network.target" ];
+    serviceConfig = {
+      ExecStart = ''
+        ${pkgs.docker}/bin/docker run \
+          --rm --network host \
+          -v /proc:/host/proc:ro \
+          -v /sys:/host/sys:ro \
+          -v /:/rootfs:ro \
+          prom/node-exporter \
+          --path.procfs=/host/proc \
+          --path.sysfs=/host/sys \
+          --collector.filesystem.ignored-mount-points \
+          "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
+      '';
     };
   };
 }
