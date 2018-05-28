@@ -57,13 +57,6 @@
   #############################################################################
   ### Localization
 
-  # Select internationalisation properties.
-  i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "us";
-    defaultLocale = "en_US.UTF-8";
-  };
-
   # Set your time zone.
   time.timeZone = "US/Central";
 
@@ -142,17 +135,23 @@
     emacs25
     exercism
     firefox
+    git-lfs
     gnuplot
     go
     graphviz
+    html2text
     libreoffice
     lz4
+    msmtp
+    mu
     nodejs-8_x
+    offlineimap
     openssl
     patchelf
     pavucontrol
     pcmanfm
     pinentry
+    plantuml
     rake
     ruby
     snappy
@@ -162,7 +161,9 @@
     tig
     tmate
     universal-ctags
+    w3m
     xfontsel
+    yq
   ];
 
   environment.pathsToLink = [ "/include" ];
