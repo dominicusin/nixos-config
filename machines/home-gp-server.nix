@@ -28,7 +28,7 @@
   ### Networking
 
   networking.hostName = "home-gp-server";
-  networking.firewall.allowedTCPPorts = [ 3000 7080 ];
+  networking.firewall.allowedTCPPorts = [ 80 443 3000 7080 ];
 
   #############################################################################
   ### Users
