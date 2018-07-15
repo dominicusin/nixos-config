@@ -33,4 +33,16 @@
       '';
     };
   };
+
+  systemd.services.snmp-exporter = {
+    description = "snmp-exporter";
+    after = [ "network.target" ];
+    serviceConfig = {
+      ExecStart = ''
+        ${pkgs.docker}/bin/docker run \
+          --rm --network host \
+          prom/snmp-exporter
+      '';
+    };
+  };
 }
