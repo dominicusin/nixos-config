@@ -3,7 +3,9 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
+let
+    evolutionEws = import ../pkgs/evolutionEws.nix pkgs;
+in
 {
   #############################################################################
   ### Imports
@@ -72,6 +74,18 @@
   services.logind.extraConfig = "HandleLidSwitch=ignore";
 
   #############################################################################
+  ### Sound
+
+  # TODO: doesn't work
+  #sound = {
+  #  enable = true;
+  #  mediaKeys = {
+  #    enable = true;
+  #    volumeStep = "5%";
+  #  };
+  #};
+
+  #############################################################################
   ### Services
 
   services.avahi = {
@@ -86,6 +100,7 @@
   ### Users
 
   security.sudo.wheelNeedsPassword = false;
+  security.pam.services.slim.enableGnomeKeyring = true;
 
   users.extraUsers.dwhittington = {
     isNormalUser = true;
@@ -131,14 +146,18 @@
     binutils
     bundler
     clojure
+    dbeaver
     easyrsa
     emacs25
+    evolutionEws
     exercism
     firefox
     git-lfs
+    gnome3.seahorse
     gnuplot
     go
     graphviz
+    hipchat
     html2text
     libreoffice
     lz4
@@ -154,15 +173,21 @@
     plantuml
     rake
     ruby
+    signal-desktop
     snappy
     sqlite-interactive
     strongswan
     swiProlog
     tig
+    tini
     tmate
     universal-ctags
     w3m
     xfontsel
+    xorg.xcbproto
+    xorg.xdpyinfo
+    xorg.xinit
+    xpra
     yq
   ];
 
