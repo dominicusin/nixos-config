@@ -88,10 +88,50 @@ in
   #############################################################################
   ### Services
 
+  services = {
+    kbfs = {
+      enable = true;
+      mountPoint = "%h/Keybase";
+    };
+
+    keybase.enable = true;
+
+    tarsnap = {
+      enable = true;
+      archives = {
+        home = {
+          directories = [ "/home" ];
+          period = "*-*-* 02:00:00";
+          excludes = [
+            "*/node_modules/*"
+            "*/tmp/*"
+            "/home/*/.dbus/"
+            "/home/*/.gvfs/"
+            "/home/*/.steam/"
+          ];
+        };
+      };
+    };
+  };
+
+  services.redshift = {
+    enable = true;
+    latitude = "43.0731";
+    longitude = "-89.4012";
+    temperature.day = 6200;
+    temperature.night = 3700;
+  };
+
+  # Restart Redshift when X restarts
+  systemd.user.services.redshift = {
+    conflicts = [ "exit.target" ];
+  };
+
   services.avahi = {
     enable = true;
     nssmdns = true;
   };
+
   #services.bitlbee.enable = true;
   services.openssh.enable = true;
   services.printing.enable = true;
