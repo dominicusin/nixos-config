@@ -88,28 +88,26 @@ in
   #############################################################################
   ### Services
 
-  services = {
-    kbfs = {
-      enable = true;
-      mountPoint = "%h/Keybase";
-    };
+  services.kbfs = {
+    enable = true;
+    mountPoint = "%h/Keybase";
+  };
 
-    keybase.enable = true;
+  services.keybase.enable = true;
 
-    tarsnap = {
-      enable = true;
-      archives = {
-        home = {
-          directories = [ "/home" ];
-          period = "*-*-* 02:00:00";
-          excludes = [
-            "*/node_modules/*"
+  services.tarsnap = {
+    enable = true;
+    archives = {
+      home = {
+        directories = [ "/home" ];
+        period = "*-*-* 02:00:00";
+        excludes = [
+          "*/node_modules/*"
             "*/tmp/*"
             "/home/*/.dbus/"
             "/home/*/.gvfs/"
             "/home/*/.steam/"
-          ];
-        };
+        ];
       };
     };
   };
