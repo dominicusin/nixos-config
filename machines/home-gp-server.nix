@@ -44,6 +44,20 @@
   };
 
   #############################################################################
+  ### Services
+
+  services.tarsnap = {
+    enable = true;
+    archives = {
+      home = {
+        directories = [ "/opt/grafana" "/opt/prometheus/etc" ];
+        period = "*-*-* 04:00:00";
+        excludes = [];
+      };
+    };
+  };
+
+  #############################################################################
   ### Packages
 
   programs = {
