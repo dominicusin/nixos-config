@@ -12,6 +12,7 @@
       ../config/zerotier.nix
       ../config/prometheus.nix
       ../config/grafana.nix
+      ../config/perkeep.nix
       ../config/sourcegraph.nix
       ../private/mail.nix
       ../private/hosts.nix
