@@ -13,6 +13,7 @@
       ../config/prometheus.nix
       ../config/grafana.nix
       ../config/perkeep.nix
+      ../config/tiddlywiki.nix
       ../config/sourcegraph.nix
       ../private/mail.nix
       ../private/hosts.nix
@@ -51,7 +52,7 @@
     enable = true;
     archives = {
       home = {
-        directories = [ "/opt/grafana" "/opt/prometheus/etc" ];
+        directories = [ "/opt/grafana" "/opt/prometheus/etc" "/opt/tiddlywiki" ];
         period = "*-*-* 04:00:00";
         excludes = [];
       };
