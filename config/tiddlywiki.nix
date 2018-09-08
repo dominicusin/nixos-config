@@ -3,7 +3,8 @@
 {
   systemd.services.tiddlywiki-djwhitt = {
     description = "tiddlywiki-djwhitt";
-    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    after = [ "docker.service" ];
     serviceConfig = {
       ExecStart = ''
         /opt/tiddlywiki/djwhitt.sh

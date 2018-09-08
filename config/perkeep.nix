@@ -3,7 +3,8 @@
 {
   systemd.services.perkeep = {
     description = "perkeep";
-    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    after = [ "docker.service" ];
     serviceConfig = {
       ExecStart = ''
         ${pkgs.docker}/bin/docker run \

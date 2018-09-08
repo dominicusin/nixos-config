@@ -3,11 +3,12 @@
 {
   systemd.services.prometheus = {
     description = "prometheus";
-    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    after = [ "docker.service" ];
     serviceConfig = {
       ExecStart = ''
         ${pkgs.docker}/bin/docker run \
-          --rm --network host \
+          --rm --network host --name prometheus \
           -v /opt/prometheus/etc:/etc/prometheus \
           -v /opt/prometheus/data:/prometheus \
           prom/prometheus:v2.2.1
@@ -17,11 +18,12 @@
 
   systemd.services.node-exporter = {
     description = "node-exporter";
-    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    after = [ "docker.service" ];
     serviceConfig = {
       ExecStart = ''
         ${pkgs.docker}/bin/docker run \
-          --rm --network host \
+          --rm --network host --name node-exporter \
           -v /proc:/host/proc:ro \
           -v /sys:/host/sys:ro \
           -v /:/rootfs:ro \
@@ -36,11 +38,12 @@
 
   systemd.services.snmp-exporter = {
     description = "snmp-exporter";
-    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    after = [ "docker.service" ];
     serviceConfig = {
       ExecStart = ''
         ${pkgs.docker}/bin/docker run \
-          --rm --network host \
+          --rm --network host --name snmp-exporter \
           prom/snmp-exporter
       '';
     };
