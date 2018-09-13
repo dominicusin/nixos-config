@@ -51,7 +51,7 @@
   services.tarsnap = {
     enable = true;
     archives = {
-      home = {
+      services = {
         directories = [ "/opt/grafana" "/opt/prometheus/etc" "/opt/tiddlywiki" ];
         period = "*-*-* 04:00:00";
         excludes = [];
