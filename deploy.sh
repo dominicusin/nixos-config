@@ -43,8 +43,6 @@ if [ "$sync_remote" = true ]; then
   for host in "$remote_hosts"; do
     echo "Syncing configuration for ${host}..."
     rsync -v -r --include='*.nix' --include='*/' --exclude='*' \
-          "${HOME}/Work/vs/lono-nixos-config/" "root@${host}:/etc/nixos/"
-    rsync -v -r --include='*.nix' --include='*/' --exclude='*' \
           "${script_dir}/" "root@${host}:/etc/nixos/"
     if [ -z "$sync_only" ]; then
       echo "Switching configuration on ${host}..."
