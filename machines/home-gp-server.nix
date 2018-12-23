@@ -52,11 +52,31 @@
     enable = true;
     archives = {
       services = {
-        directories = [ "/opt/grafana" "/opt/prometheus/etc" "/opt/tiddlywiki" ];
+        directories = [ "/opt/grafana" "/opt/perkeep/config" "/opt/prometheus/etc" "/opt/tiddlywiki" ];
         period = "*-*-* 04:00:00";
         excludes = [];
       };
     };
+  };
+
+  systemd.services.tarsnap-services-expire = {
+    script = ''
+      /run/current-system/sw/bin/tarsnapper \
+        -o keyfile /root/tarsnap.key \
+        -o cachedir /var/cache/tarsnap/root-tarsnap.key \
+        --dateformat "%Y%m%d%H%M%S" \
+        --target "services-\$date" \
+        --deltas 1d 7d 30d 90d - expire
+    '';
+    wantedBy = [ "default.target" ];
+  };
+
+  systemd.timers.tarsnap-services-expire = {
+    timerConfig = {
+      Unit = "tarsnap-home-expire.service";
+      OnCalendar = "*-*-* 04:00:00";
+    };
+    wantedBy = [ "default.target" ];
   };
 
   #############################################################################
@@ -74,6 +94,7 @@
     graphviz
     nodejs
     sqlite-interactive
+    tarsnapper
     universal-ctags
   ];
 
